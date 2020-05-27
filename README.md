@@ -1,15 +1,16 @@
-Deep Alignment Network: A convolutional neural network for robust face alignment
-===
+# Deep Alignment Network: A convolutional neural network for robust face alignment
 
 This is a **Tensorflow** implementations of paper *"Deep Alignment Network: A convolutional neural network for robust face alignment"*.
 You can see **Original implementation** [here](https://github.com/MarekKowalski/DeepAlignmentNetwork).
 
 -----------------
 
-0. [Requirements (and how to install dependecies)](#requirements)
-1. [Explain algorithm of Deep Alignment Network](#deep-alignment-network)
-2. [How to use](#how-to-use)
-3. [Achivement from DAN training](#achivement)
+### 0. [Requirements (and how to install dependecies)](#requirements)
+### 1. [Explain algorithm of Deep Alignment Network](#deep-alignment-network)
+### 2. [How to use](#how-to-use)
+### 3. [Prediction errors on test-set (and pre-trained model)](#outputs)
+
+-----------------
 
 ## Requirements
 ### System
@@ -36,6 +37,7 @@ pip install --upgrade tensorflow-gpu==1.9.0
 
 ## Deep Alignment Network
 <img src="architecture.png">
+
 The Deep Alignment Network(DAN) extracts features from the entire face image, while approaches based on Cascade Shape Regression(CSR) extract the patches around landmark locations.
 
 * feed-forward neural network
@@ -83,8 +85,8 @@ For calculating the errors, execute the command:
 python dan_predict.py
 ```
 
-## Achivement
-### Results on 300W
+## Outputs
+### Results of DAN on 300W dataset
 
 Results of DAN on the 300W public test set and its subsets.
 |Method|Common subset|Challenging subset|Full set|
