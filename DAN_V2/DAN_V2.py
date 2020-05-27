@@ -73,13 +73,13 @@ def read_dataset_info(data_dir):
     return mean_shape.astype(np.float32) ,imgs_mean.astype(np.float32),imgs_std.astype(np.float32)
 
 def video_input_fn(data_dir,img_size,num_lmark):
-    video = cv2.VideoCapture(data_dir)
+    img_path_list,_ = get_filenames(data_dir)
+    img_path_generator = (x for x in img_path_list)
 
     def _get_frame():
         while True:
-            _,frame = video.read()
-            if len(frame.shape) == 3:
-                frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+            img_path = next(img_path_generator)
+            frame = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
             frame = cv2.resize(frame,(img_size,img_size)).astype(np.float32)
             yield (frame,np.zeros([num_lmark,2],np.float32))
 

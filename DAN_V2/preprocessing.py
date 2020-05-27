@@ -127,7 +127,15 @@ def _get_filenames(data_dir, listext):
 
     return imagelist, ptslist
 
+def _make_safely_folder(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print('Error: Creating directory. ' + directory)
+
 def main(argv):
+    _make_safely_folder(FLAGS.output_dir)
     imagenames, ptsnames = _get_filenames(FLAGS.input_dir, ["*.jpg", "*.png"])
     mirror_array = np.genfromtxt(FLAGS.mirror_file, dtype=int, delimiter=',') if FLAGS.mirror_file else np.zeros(1)
     
@@ -158,7 +166,6 @@ def main(argv):
 
                 print("end")
                 break
-
 
 if __name__ == "__main__":
     tf.logging.set_verbosity(tf.logging.INFO)

@@ -170,14 +170,31 @@ def dan_main(flags, model_function, input_function):
             })
 
     if flags.mode == tf.estimator.ModeKeys.PREDICT:
+        import glob
         import cv2
+        import numpy as np
+
+        def get_filenames(data_dir):
+            listext = ['*.png','*.jpg']
+
+            imagelist = []
+            for ext in listext:
+                p = os.path.join(data_dir, ext)
+                imagelist.extend(glob.glob(p))
+
+            return imagelist
+
         predict_results = estimator.predict(input_function)
+        
+        img_path_list = get_filenames(flags.data_dir)
+        img_path_generator = (x for x in img_path_list)
         for x in predict_results:
             landmark = x['s2_ret']
             img = x['img']
 
-            cv2.imshow('t',img)
-            cv2.waitKey(30)
+            img_path = next(img_path_generator)
+            filename,_ = os.path.splitext(os.path.basename(img_path))
+            np.savetxt(os.path.join('./prep/predict',filename + '.ptv'),landmark,delimiter=',')
         return
 
 
