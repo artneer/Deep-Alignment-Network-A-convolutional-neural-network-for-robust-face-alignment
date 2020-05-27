@@ -18,9 +18,9 @@ Getting started
 First of all you need to install CUDA Toolkit and cuDNN. 
 I recommend Anaconda 3, because it has all the neccessary libraries except for tensorflow and opencv.
 
-* Anaconda 3 (Python 3.5.6) ([download](https://www.anaconda.com/products/individual))
-* CUDA v9.0.176 for Windows 10 (Sept. 2017) ([download](https://developer.nvidia.com/cuda-toolkit-archive))
-* cuDNN v7.0.5 for Windows 10 (Dec. 5, 2017) ([download](https://developer.nvidia.com/rdp/cudnn-archive))
+* Anaconda 3 (Python 3.5.6) [download](https://www.anaconda.com/products/individual)
+* CUDA v9.0.176 for Windows 10 (Sept. 2017) [download](https://developer.nvidia.com/cuda-toolkit-archive)
+* cuDNN v7.0.5 for Windows 10 (Dec. 5, 2017) [download](https://developer.nvidia.com/rdp/cudnn-archive)
 * Tensorflow 1.9.0
 * OpenCV 4.2.0
 
