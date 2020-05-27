@@ -9,6 +9,7 @@ You can see **Original implementation** [here](https://github.com/MarekKowalski/
 ### 1. [Explain algorithm of Deep Alignment Network](#deep-alignment-network)
 ### 2. [How to use](#how-to-use)
 ### 3. [Prediction errors on test-set (and pre-trained model)](#outputs)
+#### **If there is something wrong, please correct it!!!**
 
 -----------------
 
