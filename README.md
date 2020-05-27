@@ -36,14 +36,35 @@ pip install --upgrade tensorflow-gpu==1.9.0
 ```
 
 ## Deep Alignment Network
-<img src="architecture.png">
+<center><img src="architecture.png" width="633" height="387"></center>
 
 The Deep Alignment Network(DAN) extracts features from the entire face image, while approaches based on Cascade Shape Regression(CSR) extract the patches around landmark locations.
 
-* feed-forward neural network
-* normalization to canonical shape
-* landmark heatmap
-* feature image layer
+### first stage
+#### feed-forward neural network
+<center><img src="feed-forward_nn.png" width="330" height="259"></center>
+
+* use batch normalization and ReLU (Rectified Linear Units) except for max pooling and output layer.
+* add dropout before the first fully connected layer.
+* until the validation error stops improving.
+
+### second stage
+#### normalization to canonical shape
+* calculate affine transformation matrix (with rotation and translation) between averaged shape point and point of `first stage`.
+* transform input image (with bilinear interpolation) and landmark output from feed-forward neural network by using affine transformation matrix.
+#### landmark heatmap
+* 1 / (reduce_mean(||(x, y) - s||) + 1.0)
+* (x,y) : input image
+* s : landmark transformed as shape of image
+#### feature image layer
+* made by first fully connected layer of feed-forward nn
+* resize to half of image size
+* upscale to image size
+#### feed-forward neural network
+* same as first stage
+
+### loss function
+* minimize the landmark location error normalized by the distance between the pupils.
 
 ## How to use
 ### How to prepare dataset
