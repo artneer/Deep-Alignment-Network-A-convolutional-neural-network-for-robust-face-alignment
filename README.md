@@ -75,4 +75,4 @@ Results on 300W
 
 Pre-trained Model
 ---
-TODO:You can download pre-trained model [here](). This model trained on 300W dataset.
+You can download pre-trained model [download](https://drive.google.com/drive/folders/1RY4g6_uSgJYY0qbCaqPpL_Ayp1xZHQpU?usp=sharing). This model trained on 300W dataset. Copy the file to './model_dir'
