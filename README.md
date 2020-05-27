@@ -69,9 +69,33 @@ python dan_predict.py
 
 Results on 300W
 ---
-* Err : `1.54 %` on 300W common subset (bounding box diagonal normalization).
-* Err : `2.49 %` on 300W challenge subset (bounding box diagonal normalization).
-* Err : `1.73 %` on 300W full set (bounding box diagonal normalization).
+Results of DAN on the 300W public test set and its subsets.
+|Method|Common subset|Challenging subset|Full set|
+|:---:|:---:|:---:|:---:|
+|||inter-pupil normalization||
+|Paper|4.42|7.57|5.03|
+|Mine|5.09|9.38|5.93|
+|||inter-ocular normalization||
+|Paper|3.19|5.24|3.59|
+|Mine|3.67|6.49|4.22|
+|||bounding box diagonal normalization||
+|Paper|1.35|2.00|1.48|
+|Mine|1.54|2.49|1.73|
+
+Results of DAN on the 300W public test set.
+|Method|AUC 0.08|Failure (%)|
+|:---:|:---:|:---:|
+||inter-ocular normalization||
+|Paper|55.33|1.16|
+|Mine|48.04|4.35|
+
+Results of DAN on the 300W private test set.
+|Method|Mean error|AUC 0.08|Failure (%)|
+|:---:|:---:|:---:|:---:|
+|||inter-ocular normalization||
+|Paper|4.30|47.00|2.67|
+|Mine|5.18|36.84|6.00|
+
 
 Pre-trained Model
 ---
