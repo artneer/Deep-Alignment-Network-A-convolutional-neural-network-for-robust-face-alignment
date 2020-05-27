@@ -30,15 +30,26 @@ pip install --upgrade opencv-python
 pip install --upgrade tensorflow-gpu==1.9.0
 ```
 
+Deep Alignment Network?
+---
+The Deep Alignment Network(DAN) extracts features from the entire face image, while approaches based on Cascade Shape Regression(CSR) extract the patches around landmark locations.
+
+* feed-forward neural network
+* normalization to canonical shape
+* landmark heatmap
+* feature image layer
+
+
 How to prepare dataset
 ---
-* Download the 300W, LFPW, HELEN, AFW and IBUG datasets from [https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/](https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/) and extract them /DAN_V2/db/ into seperate directories: 300W, lfpw, helen, afw and ibug. Run the under script, it may take a while.
+Download the 300W, LFPW, HELEN, AFW and IBUG datasets from [https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/](https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/) and extract them /DAN_V2/db/ into seperate directories: 300W, lfpw, helen, afw and ibug. Run the under script, it may take a while.
 ```shell
 python split_trainset.py
 python split_testset.py
 ```
-* Write mirror file. There is a 68 landmark mirror file. [download](https://pan.baidu.com/s/1Ln_i00DRulDlgHJ8CmIqAQ)
-* Preprocess.
+Write mirror file on the same folder. There is a 68 landmark mirror file. [download](https://pan.baidu.com/s/1Ln_i00DRulDlgHJ8CmIqAQ)
+
+In turn, run under script to make preprocess dataset.
 ```shell
 python preprocessing.py --input_dir=./data/train --output_dir=./prep/train --istrain=True --repeat=10 --img_size=112 --mirror_file=./Mirror68.txt
 python preprocessing.py --input_dir=./data/valid --output_dir=./prep/valid --istrain=False --img_size=112
@@ -49,6 +60,7 @@ python preprocessing.py --input_dir=./data/test/300w_private_set --output_dir=./
 
 How to train model on 300W
 ---
+In turn, run under script to train model of 300W dataset. 
 ```shell
 python DAN_V2.py -ds 1 --data_dir=./prep/train --data_dir_test=./prep/valid -nlm 68 -te=15 -epe=1 -mode train
 python DAN_V2.py -ds 2 --data_dir=./prep/train --data_dir_test=./prep/valid -nlm 68 -te=45 -epe=1 -mode train
@@ -56,7 +68,7 @@ python DAN_V2.py -ds 2 --data_dir=./prep/train --data_dir_test=./prep/valid -nlm
 
 How to evaluate accuracy on 300W
 ---
-First of all, execute following script. You can get result points on './prep/predict'. Before executing next script, copy the files in the folders ('./prep/predict/common_set', './prep/predict/challenge_set', './prep/predict/300w_private_set') seperately.
+First of all, execute following script. You can get result points on `./prep/predict`. Before executing next script, copy the files in the folders (`./prep/predict/common_set`, `./prep/predict/challenge_set`, `./prep/predict/300w_private_set`) seperately.
 ```shell
 python DAN_V2.py -ds 2 --data_dir=./prep/test/common_set --data_dir_test=None -nlm 68 -mode predict
 python DAN_V2.py -ds 2 --data_dir=./prep/test/challenge_set --data_dir_test=None -nlm 68 -mode predict
@@ -99,4 +111,4 @@ Results of DAN on the 300W private test set.
 
 Pre-trained Model
 ---
-You can download pre-trained model [download](https://drive.google.com/drive/folders/1RY4g6_uSgJYY0qbCaqPpL_Ayp1xZHQpU?usp=sharing). This model trained on 300W dataset. Copy the file to './model_dir'
+You can download pre-trained model [download](https://drive.google.com/drive/folders/1RY4g6_uSgJYY0qbCaqPpL_Ayp1xZHQpU?usp=sharing). This model trained on 300W dataset. Copy the file to `./model_dir`
