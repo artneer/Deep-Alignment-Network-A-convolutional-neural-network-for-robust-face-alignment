@@ -47,14 +47,14 @@ python preprocessing.py --input_dir=./data/test/challenge_set --output_dir=./pre
 python preprocessing.py --input_dir=./data/test/300w_private_set --output_dir=./prep/test/300w_private_set --istrain=False --img_size=112
 ```
 
-How to train 300w model
+How to train model on 300w
 ---
 ```shell
 python DAN_V2.py -ds 1 --data_dir=./prep/train --data_dir_test=./prep/valid -nlm 68 -te=15 -epe=1 -mode train
 python DAN_V2.py -ds 2 --data_dir=./prep/train --data_dir_test=./prep/valid -nlm 68 -te=45 -epe=1 -mode train
 ```
 
-How to evaluate acc.
+How to evaluate accuracy on 300w
 ---
 First of all, execute following script. You can get result points on './prep/predict'. Before executing next script, copy the files in the folders ('./prep/predict/common_set', './prep/predict/challenge_set', './prep/predict/300w_private_set') seperately.
 ```shell
