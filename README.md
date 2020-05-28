@@ -96,11 +96,14 @@ python DAN_V2.py -ds 2 --data_dir=./prep/train --data_dir_test=./prep/valid -nlm
 
 ### How to evaluate accuracy on 300W
 
-First of all, execute following script. You can get result points on `./prep/predict`. Before executing next script, copy the files in the folders (`./prep/predict/common_set`, `./prep/predict/challenge_set`, `./prep/predict/300w_private_set`) seperately.
+Consequently execute following script and then copy the files in the folders (`./prep/predict/common_set`, `./prep/predict/challenge_set`, `./prep/predict/300w_private_set`) seperately.
 ```shell
 python DAN_V2.py -ds 2 --data_dir=./prep/test/common_set --data_dir_test=None -nlm 68 -mode predict
+python move_result.py ./prep/predict common_set
 python DAN_V2.py -ds 2 --data_dir=./prep/test/challenge_set --data_dir_test=None -nlm 68 -mode predict
+python move_result.py ./prep/predict challenge_set
 python DAN_V2.py -ds 2 --data_dir=./prep/test/300w_private_set --data_dir_test=None -nlm 68 -mode predict
+python move_result.py ./prep/predict 300w_private_set
 ```
 For calculating the errors, execute the command:
 ```shell

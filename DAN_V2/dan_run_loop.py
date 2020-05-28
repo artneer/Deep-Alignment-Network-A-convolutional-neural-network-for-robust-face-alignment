@@ -184,8 +184,17 @@ def dan_main(flags, model_function, input_function):
 
             return imagelist
 
+        def make_safely_folder(directory):
+            try:
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
+            except OSError:
+                print('Error: Creating directory. ' + directory)
+
         predict_results = estimator.predict(input_function)
         
+        save_path = './prep/predict'
+        make_safely_folder(save_path)
         img_path_list = get_filenames(flags.data_dir)
         img_path_generator = (x for x in img_path_list)
         for x in predict_results:
@@ -194,7 +203,7 @@ def dan_main(flags, model_function, input_function):
 
             img_path = next(img_path_generator)
             filename,_ = os.path.splitext(os.path.basename(img_path))
-            np.savetxt(os.path.join('./prep/predict',filename + '.ptv'),landmark,delimiter=',')
+            np.savetxt(os.path.join(save_path,filename + '.ptv'),landmark,delimiter=',')
         return
 
 
